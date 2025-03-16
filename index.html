@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌍 Traductor Inglés - Español 📖</title>
+    <script>
+        // 📌 Función para traducir texto
+        async function translateText() {
+            const text = document.getElementById("translateText").value;
+
+            // 🚨 Validar que el usuario ingrese texto
+            if (text.trim() === "") {
+                alert("⚠️ Por favor, ingresa un texto en inglés para traducir.");
+                return;
+            }
+
+            // 🔄 Enviar solicitud a la API de traducción
+            const response = await fetch("http://127.0.0.1:5555/translate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: text })
+            });
+
+            // ❌ Manejo de errores en la respuesta
+            if (!response.ok) {
+                document.getElementById("translationResult").innerText = "❌ Error en la traducción.";
+                return;
+            }
+
+            // ✅ Obtener la traducción y mostrarla
+            const data = await response.json();
+            document.getElementById("translationResult").innerText = `✅ Traducción: ${data.translated_text}`;
+        }
+    </script>
+</head>
+<body style="background-color: #f4f4f4; font-family: Arial, sans-serif; text-align: center; padding: 20px;">
+
+    <!-- 🏆 Título del servicio -->
+    <h1 style="color: #333;">🌍 Traductor Inglés - Español 📖</h1>
+
+    <!-- 🔠 Sección de Traducción -->
+    <h2>📝 Escribe un texto en inglés:</h2>
+    <textarea id="translateText" rows="4" cols="50" placeholder="Escribe aquí..." 
+        style="font-size: 16px; padding: 10px; width: 90%; max-width: 500px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+    <br><br>
+
+    <!-- 🔄 Botón para traducir -->
+    <button onclick="translateText()" 
+        style="padding: 12px 20px; font-size: 18px; cursor: pointer; background-color: #007BFF; color: white; border: none; border-radius: 5px;">
+        🔄 Traducir 📖
+    </button>
+
+    <!-- 📜 Resultado de la traducción -->
+    <p id="translationResult" 
+        style="margin-top: 20px; font-size: 20px; font-weight: bold; color: #333;">
+    </p>
+
+</body>
+</html>
