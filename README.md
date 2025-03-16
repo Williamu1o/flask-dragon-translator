@@ -20,7 +20,7 @@ Antes de ejecutar la aplicación, asegúrate de tener instalado:
 
 #### Clonar este repositorio:
 ```bash
-git clone https://github.com/crisrodriguez1993/flask-sentiment-translator.git
+git clone https://github.com/Williamu1o/flask-dragon-translator.git
 cd tu-repositorio
 ```
 
